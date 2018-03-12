@@ -42,6 +42,7 @@ ifeq ($(TARGET_PREBUILT_KERNEL),)
   TARGET_KERNEL_CLANG_VERSION := r370808b
   TARGET_KERNEL_SOURCE := kernel/xiaomi/sdm845
 endif
+TARGET_LMKD_STATS_LOG := true
 
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
