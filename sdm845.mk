@@ -337,13 +337,13 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service
 
 # WiFi Display
-PRODUCT_PACKAGES += \
-    libdisplayconfig \
-    libnl \
-    libqdMetaData.system
+#PRODUCT_PACKAGES += \
+#    libdisplayconfig \
+#    libnl \
+#    libqdMetaData.system
 
-PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_BOOT_JARS += \
+#    WfdCommon
 
 # Set boot SPL
 BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
