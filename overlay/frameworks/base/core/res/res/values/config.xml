@@ -246,6 +246,11 @@
          that can be set by the user. -->
     <integer name="config_screenBrightnessDoze">17</integer>
 
+    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
+         manually by the user. Off by default, since the expected haptic feedback may not be
+         available on some devices. -->
+    <bool name="config_enableHapticTextHandle">true</bool>
+
     <!-- Configure mobile tcp buffer sizes in the form:
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
          If no value is found for the rat-name in use, the system default will be applied.
@@ -317,10 +322,6 @@
          and one pSIM) -->
     <integer name="config_num_physical_slots">2</integer>
 
-    <!-- If true, the screen can be rotated via the accelerometer in all 4
-         rotations as the default behavior. -->
-    <bool name="config_allowAllRotations">true</bool>
-
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
@@ -336,25 +337,36 @@
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm64/boot-framework.oat"</item>
-        <item>"/system/framework/boot-framework.vdex"</item>
+        <item>"/system/framework/framework.jar"</item>
         <item>"/system/framework/oat/arm64/services.odex"</item>
-        <item>"/system/framework/oat/arm64/services.vdex"</item>
+        <item>"/system/framework/services.jar"</item>
         <item>"/system/framework/arm64/boot.oat"</item>
-        <item>"/system/framework/boot.vdex"</item>
         <item>"/system/framework/arm64/boot-core-libart.oat"</item>
-        <item>"/system/framework/boot-core-libart.vdex"</item>
-        <item>/system/lib64/libRScpp.so</item>
-        <item>/system/lib64/libRS.so</item>
-        <item>/system/lib64/libRS_internal.so</item>
-        <item>/system/lib64/libbcinfo.so</item>
-        <item>/system/lib64/libRSDriver.so</item>
-        <item>/system/lib64/libRSCpuRef.so</item>
-        <item>/system/lib64/libblas.so</item>
-        <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
-        <item>"/data/dalvik-cache/arm64/system@priv-app@SystemUI@SystemUI.apk@classes.dex"</item>
-        <item>"/data/dalvik-cache/arm64/system@priv-app@SystemUI@SystemUI.apk@classes.vdex"</item>
+        <item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
+        <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
+        <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
+
+    <!-- List of files pinned by the Pinner Service with the apex boot image -->
+    <string-array translatable="false" name="config_apexBootImagePinnerServiceFiles">
+        <item>"/system/framework/framework.jar"</item>
+        <item>"/system/framework/services.jar"</item>
+        <item>"/system/framework/arm64/apex.oat"</item>
+        <item>"/system/framework/arm64/apex-core-libart.oat"</item>
+        <item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
+        <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
+        <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
+        <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system/lib64/libsurfaceflinger.so"</item>
+    </string-array>
+
+    <!-- Vibrator pattern for feedback about touching a virtual key -->
+    <integer-array name="config_virtualKeyVibePattern">
+        <item>3</item>
+        <item>8</item>
+        <item>13</item>
+    </integer-array>
 
     <!-- Should the pinner service pin the Camera application? -->
     <bool name="config_pinnerCameraApp">true</bool>
@@ -372,18 +384,19 @@
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
+    <!-- Whether device has screen with higher aspect ratio -->
+    <bool name="config_haveHigherAspectRatioScreen">true</bool>
+
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveNotificationLed">true</bool>
+
+    <!-- True if the firmware supports connected MAC randomization -->
+    <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
+
+    <!-- True if the firmware supports Wi-Fi link probing -->
+    <bool name="config_wifi_link_probing_supported">true</bool>
+
     <!-- Whether device ignores the RSSNR signal implementation -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
 
-    <!-- Whether to allow sending active app broadcast -->
-    <bool name="config_allowActivePackageBroadcast">true</bool>
-
-     <!-- Lawnstep -->
-    <string name="config_recentsComponentName" translatable="false">ch.deletescape.lawnchair.ci/com.android.quickstep.RecentsActivity</string>
-
-     <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">4</integer>
-
-     <!--  Whether Multiuser UI should be shown -->
-    <bool name="config_enableMultiUserUI">true</bool>
 </resources>

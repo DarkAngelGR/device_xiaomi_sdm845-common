@@ -31,6 +31,7 @@ import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.msm.usb.configfs.rc
 import /vendor/etc/init/hw/init.target.rc
+import /vendor/etc/init/hw/init.safailnet.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -227,12 +228,12 @@ on boot
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
     # Allow access to emmc rawdump block partition and dload sysfs node
-    chown root system /dev/block/bootdevice/by-name/rawdump -p /dev/block/
-    chmod 0660 /dev/block/bootdevice/by-name/rawdump -p /dev/block/
+    chown root system /dev/block/bootdevice/by-name/rawdump
+    chmod 0660 /dev/block/bootdevice/by-name/rawdump
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
-    chown root system /dev/block/bootdevice/by-name/ramdump -p /dev/block/
-    chmod 0660 /dev/block/bootdevice/by-name/ramdump -p /dev/block/
+    chown root system /dev/block/bootdevice/by-name/ramdump
+    chmod 0660 /dev/block/bootdevice/by-name/ramdump
     chown root system /sys/kernel/dload/dload_mode
     chmod 0660 /sys/kernel/dload/dload_mode
 
@@ -262,24 +263,6 @@ on boot
 
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
-
-    # Regionalization config and prop files
-    chmod 0644 /persist/speccfg/spec
-    chmod 0644 /persist/speccfg/devicetype
-    chmod 0644 /persist/speccfg/mbnversion
-    chmod 0644 /persist/speccfg/.not_triggered
-    chmod 0644 /persist/speccfg/vendor_ro.prop
-    chmod 0644 /persist/speccfg/vendor_persist.prop
-    chmod 0644 /persist/speccfg/submask
-    chmod 0644 /persist/speccfg/partition
-    chown system system /persist/speccfg/spec
-    chown system system /persist/speccfg/devicetype
-    chown system system /persist/speccfg/mbnversion
-    chown system system /persist/speccfg/.not_triggered
-    chown system system /persist/speccfg/vendor_ro.prop
-    chown system system /persist/speccfg/vendor_persist.prop
-    chown system system /persist/speccfg/submask
-    chown system system /persist/speccfg/partition
 
     # USB controller configuration
     setprop vendor.usb.rndis.func.name "gsi"
@@ -860,24 +843,24 @@ service cdsprpcd /vendor/bin/cdsprpcd
     user system
     group system
 
-# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
+# imsdatadaemon starts with root and UID will be downgraded to RADIO.
 service vendor.imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
-    user system
+    user radio
     socket ims_qmid stream 0660 system radio
     group radio log diag
 
-# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
+# imsdatadaemon starts with root and UID will be downgraded to RADIO.
 service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
-    user system
+    user radio
     socket ims_datad stream 0660 system radio
-    group system wifi radio inet log diag
+    group radio wifi inet log diag
     disabled
 
 service vendor.imsrcsservice /system/vendor/bin/imsrcsd
     class main
-    user system
+    user radio
     group radio diag inet log wakelock
 
 on property:vendor.ims.QMI_DAEMON_STATUS=1
@@ -885,8 +868,8 @@ on property:vendor.ims.QMI_DAEMON_STATUS=1
 
 service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     class main
-    user system
-    group radio diag inet log
+    user radio
+    group radio vendor_qti_diag inet log
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     restart vendor.ims_rtp_daemon
@@ -907,13 +890,13 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=restarting
     stop ppd
 
-on property:init.svc.vendor.hwcomposer-2-1=stopped
+on property:init.svc.vendor.hwcomposer-2-3=stopped
     stop ppd
 
-on property:init.svc.vendor.hwcomposer-2-1=running
+on property:init.svc.vendor.hwcomposer-2-3=running
     start ppd
 
-on property:init.svc.vendor.hwcomposer-2-1=restarting
+on property:init.svc.vendor.hwcomposer-2-3=restarting
     stop ppd
 
 on property:vold.decrypt=trigger_restart_framework && property:ro.crypto.type=block && property:persist.ppd.fde.config=0

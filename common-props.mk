@@ -139,6 +139,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.soundtrigger.training.level=60 \
     ro.vendor.audio.soundtrigger.hist.duration=1500
 
+# LMKD
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.low=1001 \
+    ro.lmk.medium=800 \
+    ro.lmk.critical=0 \
+    ro.lmk.critical_upgrade=false \
+    ro.lmk.upgrade_pressure=100 \
+    ro.lmk.downgrade_pressure=100 \
+    ro.lmk.kill_heaviest_task=true \
+    ro.lmk.kill_timeout_ms=100 \
+    ro.lmk.use_minfree_levels=true
+
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.video=true \
@@ -163,6 +175,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RCS and IMS
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1 \
     persist.rcs.supported=0 \
     persist.vendor.ims.disableUserAgent=0
 
@@ -188,3 +202,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ssr.enable_ramdumps=0 \
     persist.vendor.ssr.restart_level=ALL_ENABLE
+
+# SurfaceFlinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=2 \
+    ro.surface_flinger.max_virtual_display_dimension=4096 \
+    ro.surface_flinger.protected_contents=true \
+    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
+    ro.surface_flinger.use_color_management=true

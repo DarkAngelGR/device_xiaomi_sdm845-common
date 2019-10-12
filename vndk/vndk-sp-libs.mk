@@ -1,5 +1,4 @@
 VNDK_SP_LIBRARIES := \
-    android.hardware.graphics.allocator@2.0 \
     android.hardware.graphics.mapper@2.0 \
     android.hardware.graphics.mapper@2.1 \
     android.hardware.graphics.common@1.0 \
@@ -17,7 +16,6 @@ VNDK_SP_LIBRARIES := \
     libc++ \
     libcompiler_rt \
     libcutils \
-    libft2 \
     libhardware \
     libhidlbase \
     libhidlmemory \
@@ -25,7 +23,6 @@ VNDK_SP_LIBRARIES := \
     libhwbinder \
     libion \
     liblzma \
-    libpng \
     libunwind \
     libunwindstack \
     libutils \
