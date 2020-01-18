@@ -1,0 +1,7 @@
+[
+  {
+    "repository" : "TwistedKernel/Twisted-845",
+    "target_path": "kernel/xiaomi/sdm845",
+    "branch": "master"
+  }
+]
