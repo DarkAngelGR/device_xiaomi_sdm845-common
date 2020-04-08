@@ -1,0 +1,2 @@
+allow vendor_vppservice default_android_hwservice:hwservice_manager { add };
+allow vendor_vppservice hal_capabilityconfigstore_qti_hwservice:hwservice_manager { find };
